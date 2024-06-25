@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <cs50.h>
+#include <stdlib.h>
 
 int main(void)
 {
@@ -26,41 +27,42 @@ int main(void)
         //printf("%d", digits[i]);
 
     }
-    //printf("\nSeparated digits\n");
+
+    printf("Digits input starting from last number: ");
+    for (int i = 0; i < length; i++)
+    {
+        printf("%d ", digits[i]);
+    }
+    printf("\n");
 
     int digits1[length / 2];
     int j = 0;
     for (int i = 1; i < length; i += 2)
     {
-        //printf("\nJ Value: %d\n", j);
-        //printf("Current Digit: %d", digits[i]);
         digits1[j] = digits[i];
-        //printf("\nDigits1 Array: %d\n",digits1[j]);
         j++;
     }
 
-    int digits2[(length / 2)];
-    int k = 0;
-    for (int i = 0; i < length; i += 2)
-    {
-       // printf("\nJ Value: %d\n", k);
-        //printf("Current Digit: %d", digits[i]);
-        digits2[k] = digits[i];
-        //printf("\nDigits2 Array: %d\n",digits2[k]);
-        k++;
-    }
-
-    // print digits1 array
-    printf("Digits1: ");
+    // Print digits1 array
+    printf("Digit set 1: ");
     for (int i = 0; i < length / 2; i++)
     {
         printf("%d ", digits1[i]);
     }
     printf("\n");
 
-    // print digits2 array
-    printf("Digits2: ");
-    for (int i = 0; i < length / 2; i++)
+
+    int digits2[length / 2];
+    int k = 0;
+    for (int i = 0; i < length; i += 2)
+    {
+        digits2[k] = digits[i];
+        k++;
+    }
+
+    // Print digits2 array
+    printf("Digit set 2: ");
+    for (int i = 0; i < (length + 1) / 2; i++)
     {
         printf("%d ", digits2[i]);
     }
@@ -71,44 +73,56 @@ int main(void)
     for (int i = 0; i < length / 2; i++)
     {
         digits1[i] = digits1[i] * 2;
-        printf("Digits1 x 2: %d\n",digits1[i]);
-        result1 = result1 * 10 + digits1[i];
+        //printf("Digits1 x 2: %d\n",digits1[i]);
+
     }
 
-    //printf("\nResult1: %d\n", result1);
+    printf("Digit set 1 * 2: ");
+    for (int i = 0; i < length / 2; i++)
+    {
+        printf("%d ", digits1[i]);
+    }
+    printf("\n");
+
+    // Convert double digits into single digits
+    int l = 0;
+    int digits1single[50];
+    for  (int i = 0; i < length / 2; i++)
+    {
+        if (digits1[i] > 9) {
+            int first_digit = digits1[i] / 10;
+            int second_digit = digits1[i] % 10;
+            digits1single[l] = first_digit;
+            l++;
+            digits1single[l] = second_digit;
+            l++;
+        } else {
+            digits1single[l] = digits1[i];
+            l++;
+        }
+    }
+
+    printf("New single digit array: ");
+    for (int i = 0; i < l; i++)
+    {
+        printf("%d ", digits1single[i]);
+    }
 
     // Count length of result
     int length1 = 0;
-    int result1length = result1;
-    while (result1length !=0)
-    {
-        result1length /= 10;
-        length1++;
-    }
-    printf("\nResult1 Length: %d\n", length1);
-    printf("\nResult1: %d\n", result1);
-    // Turn result1 back into an array
-    int checksum1[length1];
-    for (int i = 0; i < length1; i++)
-    {
-        //printf("\nResult1: %d\n", result1);
-        checksum1[i] = result1 % 10;
-        result1 /= 10;
-        printf("%d", checksum1[i]);
 
-    }
     result1 = 0;
-    // Add checksum1 digits together
-    for (int i = 0; i < length1; i++)
+    // Add digits1single digits together
+    for (int i = 0; i < l; i++)
     {
         //printf("\nResult1: %d\n", result1);
-        result1 = result1 + checksum1[i];
+        result1 = result1 + digits1single[i];
     }
-    printf("\nResult1 total: %d\n", result1);
+    printf("\nSum of digits1single: %d\n", result1);
 
     // Add digits2 together
     int result2 = 0;
-    for (int i = 0; i < length1; i++)
+    for (int i = 0; i < (length + 1) / 2; i++)
     {
         //printf("\nResult1: %d\n", result1);
         result2 = result2 + digits2[i];
