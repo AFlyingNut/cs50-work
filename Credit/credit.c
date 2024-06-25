@@ -28,6 +28,18 @@ int main(void)
 
     }
 
+    int firsttwo[2];
+    int m = 0;
+    printf("First Two Starting Position: %d\n", length);
+    printf("First Two Ending Position: %d\n", length - 2);
+    for (int i = length - 1; i > length - 3; i--)
+    {
+        firsttwo[m] = digits[i];
+        m++;
+    }
+
+    printf("FIRST TWO: %d %d\n",firsttwo[0], firsttwo[1]);
+
     printf("Digits input starting from last number: ");
     for (int i = 0; i < length; i++)
     {
@@ -127,19 +139,50 @@ int main(void)
         //printf("\nResult1: %d\n", result1);
         result2 = result2 + digits2[i];
     }
-   printf("\nResult2 total: %d\n", result2);
+    printf("\nResult2 total: %d\n", result2);
 
-   int result = result1 + result2;
-   printf("\nResult: %d\n", result);
-   result = result % 10;
+    int result = result1 + result2;
+    printf("\nResult: %d\n", result);
+    result = result % 10;
 
+    printf("One: %d Two: %d\n", firsttwo[0], firsttwo[1]);
     if (result == 0)
     {
-        printf("\nThis is a valid card\n");
+        if (firsttwo[0] == 4)
+        {
+            printf("\nVISA\n");
+        }
+        else if (firsttwo[0] == 3)
+        {
+            if (firsttwo[1] == 4 || firsttwo[1] == 7)
+            {
+                printf("\nAMEX\n");
+            }
+            else
+            {
+                printf("\nINVALID\n");
+            }
+        }
+        else if (firsttwo[0] == 5)
+        {
+            if (firsttwo[1] == 1 || firsttwo[1] == 2 || firsttwo[1] == 3 || firsttwo[1] == 4 || firsttwo[1] == 5)
+            {
+                printf("\nMASTERCARD\n");
+            }
+            else
+            {
+                printf("\nINVALID\n");
+            }
+        }
+        else
+        {
+            printf("\nINVALID\n");
+        }
+
     }
         else
     {
-        printf("\nThis is not a valid card\n");
+        printf("\nINVALID\n");
     }
 
 }
