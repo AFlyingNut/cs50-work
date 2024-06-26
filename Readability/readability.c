@@ -18,18 +18,18 @@ int main(void)
     int words = count_words(text);
     int sentences = count_sentences(text);
 
-    printf("\nLetters: %i\nWords: %i\nSentences: %i\n", letters, words, sentences);
+    //printf("\nLetters: %i\nWords: %i\nSentences: %i\n", letters, words, sentences);
     // Compute the Coleman-Liau index
 
     float l = ((float) letters / words) * 100;
     float s = ((float) sentences / words) * 100;
     float cli = 0.0588 * l - 0.296 * s - 15.8;
-    printf("\nAverage Letters: %f\n", l);
-    printf("Average Sentences: %f\n", s);
+    //printf("\nAverage Letters: %f\n", l);
+    //printf("Average Sentences: %f\n", s);
 
     cli = round(cli);
     // Print the grade level
-    printf("Reading Level: %i\n", (int)cli);
+    //printf("Reading Level: %i\n", (int)cli);
 
     if (cli <=1)
     {
@@ -58,7 +58,6 @@ int count_letters(string input)
         input[i] = toupper(input[i]);
         if (input[i] >= 'A' && input[i] <= 'Z')
         {
-            //printf("%c", input[i]);
             letters = letters + 1;
         }
     }
